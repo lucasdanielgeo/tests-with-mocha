@@ -1,4 +1,4 @@
-const fs = require('fs');
+const fs = require('fs').promises;
 
 class Todos {
 	constructor() {
@@ -36,13 +36,13 @@ class Todos {
 		}
 	}
 
-	saveToFile(callback) {
+	saveToFile() {
 		let fileContents = 'Title,Completed\n';
 		this.todos.forEach(todo => {
 			fileContents += `${todo.title},${todo.completed}\n`
 		});
 
-		fs.writeFile('todos.csv', fileContents, callback)
+		return fs.writeFile('todos.csv', fileContents)
 	}
 }
 
